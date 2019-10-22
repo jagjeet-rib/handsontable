@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 16/10/2019 09:50:41)
+ * Release date: 16/10/2019 (built at 22/10/2019 12:10:10)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39404,7 +39404,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "16/10/2019 09:50:41";
+Handsontable.buildDate = "22/10/2019 12:10:10";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
@@ -44384,9 +44384,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__327__;
 
 /***/ }),
 /* 328 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 329 */
@@ -53585,7 +53585,8 @@ function (_BasePlugin) {
   }, {
     key: "recalculateAllRowsHeight",
     value: function recalculateAllRowsHeight() {
-      if ((0, _element.isVisible)(this.hot.view.wt.wtTable.TABLE)) {
+      // https://github.com/handsontable/handsontable/issues/6331
+      if (this.hot.view && (0, _element.isVisible)(this.hot.view.wt.wtTable.TABLE)) {
         this.clearCache();
         this.calculateAllRowsHeight();
       }
@@ -86200,6 +86201,15 @@ function (_BaseUI) {
     (0, _classCallCheck2.default)(this, CollapsingUI);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(CollapsingUI).call(this, nestedRowsPlugin, hotInstance));
     /**
+     * Nasted headers cached settings.
+     *
+     * @private
+     * @type {Object}
+     * default False
+     */
+
+    _this.alwaysCollapseChildren = !!_this.hot.getSettings().alwaysCollapseChildren;
+    /**
      * Reference to the Trim Rows plugin.
      */
 
@@ -86512,6 +86522,12 @@ function (_BaseUI) {
           var childIndex = _this8.dataManager.getRowIndex(elem);
 
           rowsToExpand.push(childIndex);
+        });
+      }
+
+      if (this.alwaysCollapseChildren) {
+        (0, _array.arrayEach)(rowsToExpand, function (elem) {
+          _this8.collapseChildren(elem, false);
         });
       }
 

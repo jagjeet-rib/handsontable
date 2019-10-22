@@ -17,6 +17,15 @@ class CollapsingUI extends BaseUI {
     super(nestedRowsPlugin, hotInstance);
 
     /**
+     * Nasted headers cached settings.
+     *
+     * @private
+     * @type {Object}
+     * default False
+     */
+    this.alwaysCollapseChildren = !!this.hot.getSettings().alwaysCollapseChildren;
+
+    /**
      * Reference to the Trim Rows plugin.
      */
     this.trimRowsPlugin = nestedRowsPlugin.trimRowsPlugin;
@@ -248,6 +257,7 @@ class CollapsingUI extends BaseUI {
    * @param {Boolean} [doTrimming=true] If set to `true`, the trimming will be applied when the function finishes.
    */
   expandChildren(row, forceRender = true, doTrimming = true) {
+
     const rowsToExpand = [];
     let rowObject = null;
     let rowIndex = null;
@@ -268,6 +278,12 @@ class CollapsingUI extends BaseUI {
         const childIndex = this.dataManager.getRowIndex(elem);
 
         rowsToExpand.push(childIndex);
+      });
+    }
+
+    if (this.alwaysCollapseChildren) {
+      arrayEach(rowsToExpand, (elem) => {
+        this.collapseChildren(elem, false);
       });
     }
 

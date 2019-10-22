@@ -270,7 +270,8 @@ class AutoRowSize extends BasePlugin {
    * Recalculates all rows height (overwrite cache values).
    */
   recalculateAllRowsHeight() {
-    if (isVisible(this.hot.view.wt.wtTable.TABLE)) {
+    // https://github.com/handsontable/handsontable/issues/6331
+    if (this.hot.view && isVisible(this.hot.view.wt.wtTable.TABLE)) {
       this.clearCache();
       this.calculateAllRowsHeight();
     }
