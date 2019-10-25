@@ -336,7 +336,7 @@ class HiddenColumns extends BasePlugin {
       if (cellProperties.renderer !== hiddenRenderer) {
         cellProperties.baseRenderer = cellProperties.renderer;
       }
-      cellProperties.renderer = hiddenRenderer;
+      // cellProperties.renderer = hiddenRenderer;
 
     } else if (cellProperties.baseRenderer !== null) { // We must pass undefined value too (for the purposes of inheritance cell/column settings).
       cellProperties.renderer = cellProperties.baseRenderer;

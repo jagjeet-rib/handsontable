@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 25/10/2019 17:38:16)
+ * Release date: 16/10/2019 (built at 25/10/2019 17:53:32)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39404,7 +39404,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "25/10/2019 17:38:16";
+Handsontable.buildDate = "25/10/2019 17:53:32";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
@@ -87384,9 +87384,8 @@ function (_BasePlugin) {
       if (this.isHidden(colIndex)) {
         if (cellProperties.renderer !== hiddenRenderer) {
           cellProperties.baseRenderer = cellProperties.renderer;
-        }
+        } // cellProperties.renderer = hiddenRenderer;
 
-        cellProperties.renderer = hiddenRenderer;
       } else if (cellProperties.baseRenderer !== null) {
         // We must pass undefined value too (for the purposes of inheritance cell/column settings).
         cellProperties.renderer = cellProperties.baseRenderer;
