@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 25/10/2019 17:53:32)
+ * Release date: 16/10/2019 (built at 28/10/2019 16:22:14)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39404,7 +39404,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "25/10/2019 17:53:32";
+Handsontable.buildDate = "28/10/2019 16:22:14";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
@@ -54416,9 +54416,11 @@ function rootComparator(sortingOrders, columnMetas) {
     // We sort array of arrays. Single array is in form [rowIndex, ...values].
     // We compare just values, stored at second index of array.
     var _rowIndexWithValues = (0, _toArray2.default)(rowIndexWithValues),
+        row = _rowIndexWithValues[0],
         values = _rowIndexWithValues.slice(1);
 
     var _nextRowIndexWithValu = (0, _toArray2.default)(nextRowIndexWithValues),
+        nextRow = _nextRowIndexWithValu[0],
         nextValues = _nextRowIndexWithValu.slice(1);
 
     return function getCompareResult(column) {
@@ -54428,7 +54430,7 @@ function rootComparator(sortingOrders, columnMetas) {
       var nextValue = nextValues[column];
       var pluginSettings = columnMeta.columnSorting;
       var compareFunctionFactory = pluginSettings.compareFunctionFactory ? pluginSettings.compareFunctionFactory : (0, _sortService.getCompareFunctionFactory)(columnMeta.type);
-      var compareResult = compareFunctionFactory(sortingOrder, columnMeta, pluginSettings)(value, nextValue); // DIFF - MultiColumnSorting & ColumnSorting: removed iteration through next sorted columns.
+      var compareResult = compareFunctionFactory(sortingOrder, columnMeta, pluginSettings)([row, value], [nextRow, nextValue]); // DIFF - MultiColumnSorting & ColumnSorting: removed iteration through next sorted columns.
 
       return compareResult;
     }(0);
