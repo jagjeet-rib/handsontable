@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 28/10/2019 16:22:14)
+ * Release date: 16/10/2019 (built at 30/10/2019 09:43:04)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39404,7 +39404,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "28/10/2019 16:22:14";
+Handsontable.buildDate = "30/10/2019 09:43:04";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
@@ -85689,6 +85689,14 @@ function () {
       var rootNodeMock = {
         __children: this.data
       };
+      /*do not recalculate every time, its very slow, extremely slow.*/
+
+      var nestedCountedRows = this.hot.getSettings().nestedCountedRows;
+
+      if (nestedCountedRows) {
+        return nestedCountedRows;
+      }
+
       return this.countChildren(rootNodeMock);
     }
     /**
@@ -86589,7 +86597,7 @@ function (_BaseUI) {
           parentsToCollapse.push(elem);
         }
       });
-      this.collapseMultipleChildren(parentsToCollapse);
+      this.collapseMultipleChildren(parentsToCollapse, false);
       this.renderAndAdjust();
     }
     /**
@@ -86608,7 +86616,7 @@ function (_BaseUI) {
           parentsToExpand.push(elem);
         }
       });
-      this.expandMultipleChildren(parentsToExpand);
+      this.expandMultipleChildren(parentsToExpand, false);
       this.renderAndAdjust();
     }
     /**

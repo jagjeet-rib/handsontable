@@ -336,7 +336,7 @@ class CollapsingUI extends BaseUI {
       }
     });
 
-    this.collapseMultipleChildren(parentsToCollapse);
+    this.collapseMultipleChildren(parentsToCollapse, false);
 
     this.renderAndAdjust();
   }
@@ -354,7 +354,7 @@ class CollapsingUI extends BaseUI {
       }
     });
 
-    this.expandMultipleChildren(parentsToExpand);
+    this.expandMultipleChildren(parentsToExpand, false);
 
     this.renderAndAdjust();
   }
