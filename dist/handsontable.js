@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 30/10/2019 09:43:04)
+ * Release date: 16/10/2019 (built at 31/10/2019 11:22:53)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39239,6 +39239,11 @@ function (_BaseUI) {
     key: "appendLevelIndicators",
     value: function appendLevelIndicators(row, TH) {
       var rowIndex = this.trimRowsPlugin.rowsMapper.getValueByIndex(row);
+
+      if (rowIndex === null) {
+        rowIndex = row;
+      }
+
       var rowLevel = this.dataManager.getRowLevel(rowIndex);
       var rowObject = this.dataManager.getDataObject(rowIndex);
       var innerDiv = TH.getElementsByTagName('DIV')[0];
@@ -39404,7 +39409,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "30/10/2019 09:43:04";
+Handsontable.buildDate = "31/10/2019 11:22:53";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
