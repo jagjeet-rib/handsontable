@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 31/10/2019 16:09:05)
+ * Release date: 16/10/2019 (built at 31/10/2019 17:12:56)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39408,7 +39408,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "31/10/2019 16:09:05";
+Handsontable.buildDate = "31/10/2019 17:12:56";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
@@ -41213,7 +41213,8 @@ function () {
 
           if (rowHeight) {
             // Decrease height. 1 pixel will be "replaced" by 1px border top
-            TR.firstChild.style.height = "".concat(rowHeight - 1, "px");
+            // TR.firstChild.style.height = `${rowHeight - 1}px`;
+            TR.firstChild.style.height = "".concat(rowHeight, "px");
           } else {
             TR.firstChild.style.height = '';
           }
