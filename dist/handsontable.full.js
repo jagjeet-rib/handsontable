@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 31/10/2019 14:28:45)
+ * Release date: 16/10/2019 (built at 31/10/2019 16:09:05)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -15660,7 +15660,6 @@ function () {
         }
 
         if (!previousRowHeight && this.wot.wtSettings.settings.defaultRowHeight < rowInnerHeight || previousRowHeight < rowInnerHeight) {
-          rowInnerHeight += 1;
           this.wot.wtViewport.oversizedRows[sourceRowIndex] = rowInnerHeight;
         }
       }
@@ -70635,7 +70634,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "31/10/2019 14:28:45";
+Handsontable.buildDate = "31/10/2019 16:09:05";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module

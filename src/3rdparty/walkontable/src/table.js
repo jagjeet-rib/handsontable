@@ -705,7 +705,6 @@ class Table {
 
       if ((!previousRowHeight && this.wot.wtSettings.settings.defaultRowHeight < rowInnerHeight ||
           previousRowHeight < rowInnerHeight)) {
-        rowInnerHeight += 1;
         this.wot.wtViewport.oversizedRows[sourceRowIndex] = rowInnerHeight;
       }
     }
