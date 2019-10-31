@@ -777,7 +777,7 @@ export function outerHeight(elem) {
  * @returns {number} Element's inner height
  */
 export function innerHeight(element) {
-  return element.clientHeight || element.innerHeight;
+  return element.offsetHeight || element.clientHeight || element.innerHeight;
 }
 
 /**

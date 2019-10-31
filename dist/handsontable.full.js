@@ -29,7 +29,7 @@
  * FROM USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 7.2.1
- * Release date: 16/10/2019 (built at 31/10/2019 11:22:53)
+ * Release date: 16/10/2019 (built at 31/10/2019 14:28:45)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -6357,7 +6357,7 @@ function outerHeight(elem) {
 
 
 function innerHeight(element) {
-  return element.clientHeight || element.innerHeight;
+  return element.offsetHeight || element.clientHeight || element.innerHeight;
 }
 /**
  * Returns the element's inner width.
@@ -70635,7 +70635,7 @@ Handsontable.EventManager = _eventManager.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "31/10/2019 11:22:53";
+Handsontable.buildDate = "31/10/2019 14:28:45";
 Handsontable.version = "7.2.1"; // Export Hooks singleton
 
 Handsontable.hooks = _pluginHooks.default.getSingleton(); // TODO: Remove this exports after rewrite tests about this module
