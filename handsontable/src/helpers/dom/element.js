@@ -800,7 +800,10 @@ export function outerHeight(element) {
  * @returns {number} Element's inner height.
  */
 export function innerHeight(element) {
-  return element.clientHeight || element.innerHeight;
+  if (element.getBoundingClientRect) {
+    return +(element.getBoundingClientRect().height).toFixed(2);
+  }
+  return element.offsetHeight || element.clientHeight || element.innerHeight;
 }
 
 /**

@@ -813,7 +813,7 @@ class Table {
 
       if ((!previousRowHeight && this.wtSettings.getSetting('defaultRowHeight') < rowInnerHeight ||
           previousRowHeight < rowInnerHeight)) {
-        rowInnerHeight += 1;
+        // rowInnerHeight += 1;
         this.dataAccessObject.wtViewport.oversizedRows[sourceRowIndex] = rowInnerHeight;
       }
     }
