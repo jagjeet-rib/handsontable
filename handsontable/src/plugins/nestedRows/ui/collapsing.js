@@ -255,7 +255,7 @@ class CollapsingUI extends BaseUI {
    * @param {boolean} [doTrimming=true] If set to `true`, the trimming will be applied when the function finishes.
    * @returns {number[]}
    */
-  expandChildren(row, forceRender = true, doTrimming = true) {
+  expandChildren(row, forceRender = true, doTrimming = true, recursive = false) {
     const rowsToExpand = [];
     let rowObject = null;
     let rowIndex = null;
@@ -279,7 +279,7 @@ class CollapsingUI extends BaseUI {
       });
     }
 
-    rowsToUntrim = this.expandRows(rowsToExpand, false, false);
+    rowsToUntrim = this.expandRows(rowsToExpand, recursive, false);
 
     if (doTrimming) {
       this.untrimRows(rowsToUntrim);
@@ -299,11 +299,11 @@ class CollapsingUI extends BaseUI {
    * @param {boolean} [forceRender=true] `true` if the table should render after finishing the function.
    * @param {boolean} [doTrimming=true] `true` if the rows should be untrimmed after finishing the function.
    */
-  expandMultipleChildren(rows, forceRender = true, doTrimming = true) {
+  expandMultipleChildren(rows, forceRender = true, doTrimming = true, recursive = false) {
     const rowsToUntrim = [];
 
     arrayEach(rows, (elem) => {
-      rowsToUntrim.push(...this.expandChildren(elem, false, false));
+      rowsToUntrim.push(...this.expandChildren(elem, false, false, recursive));
     });
 
     if (doTrimming) {
@@ -346,7 +346,7 @@ class CollapsingUI extends BaseUI {
       }
     });
 
-    this.expandMultipleChildren(parentsToExpand);
+    this.expandMultipleChildren(parentsToExpand, undefined, undefined, true);
 
     this.renderAndAdjust();
   }

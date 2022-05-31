@@ -26,7 +26,7 @@
  * USE OR INABILITY TO USE THIS SOFTWARE.
  * 
  * Version: 12.0.0
- * Release date: 28/04/2022 (built at 31/05/2022 10:00:50)
+ * Release date: 28/04/2022 (built at 31/05/2022 11:03:06)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -45150,7 +45150,7 @@ Handsontable.Core = function (rootElement) {
 Handsontable.DefaultSettings = (0, _dataMap.metaSchemaFactory)();
 Handsontable.hooks = _pluginHooks.default.getSingleton();
 Handsontable.packageName = 'handsontable';
-Handsontable.buildDate = "31/05/2022 10:00:50";
+Handsontable.buildDate = "31/05/2022 11:03:06";
 Handsontable.version = "12.0.0";
 Handsontable.languages = {
   dictionaryKeys: _registry.dictionaryKeys,
@@ -101923,6 +101923,7 @@ var CollapsingUI = /*#__PURE__*/function (_BaseUI) {
 
       var forceRender = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var doTrimming = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var recursive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
       var rowsToExpand = [];
       var rowObject = null;
       var rowIndex = null;
@@ -101946,7 +101947,7 @@ var CollapsingUI = /*#__PURE__*/function (_BaseUI) {
         });
       }
 
-      rowsToUntrim = this.expandRows(rowsToExpand, false, false);
+      rowsToUntrim = this.expandRows(rowsToExpand, recursive, false);
 
       if (doTrimming) {
         this.untrimRows(rowsToUntrim);
@@ -101973,9 +101974,10 @@ var CollapsingUI = /*#__PURE__*/function (_BaseUI) {
 
       var forceRender = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var doTrimming = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var recursive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
       var rowsToUntrim = [];
       (0, _array.arrayEach)(rows, function (elem) {
-        rowsToUntrim.push.apply(rowsToUntrim, (0, _toConsumableArray2.default)(_this9.expandChildren(elem, false, false)));
+        rowsToUntrim.push.apply(rowsToUntrim, (0, _toConsumableArray2.default)(_this9.expandChildren(elem, false, false, recursive)));
       });
 
       if (doTrimming) {
@@ -102021,7 +102023,7 @@ var CollapsingUI = /*#__PURE__*/function (_BaseUI) {
           parentsToExpand.push(elem);
         }
       });
-      this.expandMultipleChildren(parentsToExpand);
+      this.expandMultipleChildren(parentsToExpand, undefined, undefined, true);
       this.renderAndAdjust();
     }
     /**
