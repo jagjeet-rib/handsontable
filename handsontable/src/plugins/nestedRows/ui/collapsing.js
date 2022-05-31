@@ -279,7 +279,7 @@ class CollapsingUI extends BaseUI {
       });
     }
 
-    rowsToUntrim = this.expandRows(rowsToExpand, true, false);
+    rowsToUntrim = this.expandRows(rowsToExpand, false, false);
 
     if (doTrimming) {
       this.untrimRows(rowsToUntrim);
