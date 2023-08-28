@@ -62,17 +62,6 @@ describe('IndexMapper', () => {
     indexMapper.unregisterMap('lPIndexToValueMap');
   });
 
-  it('should trigger `change` hook on initialization once', () => {
-    const indexMapper = new IndexMapper();
-    const changeCallback = jasmine.createSpy('change');
-
-    indexMapper.addLocalHook('change', changeCallback);
-
-    indexMapper.initToLength(10);
-
-    expect(changeCallback.calls.count()).toEqual(1);
-  });
-
   it('should register map to proper collection when it is possible', () => {
     const indexMapper = new IndexMapper();
     const trimmingMap = new TrimmingMap();
@@ -658,91 +647,84 @@ describe('IndexMapper', () => {
     indexMapper.unregisterMap('hidingMap');
   });
 
-  describe('getFirstNotHiddenIndex() - legacy method', () => {
-    it('should find the nearest non-hidden index searching by forward', () => {
+  describe('local hooks', () => {
+    it('should trigger `change` hook on initialization once', () => {
       const indexMapper = new IndexMapper();
-      const trimmingMap = new TrimmingMap();
-      const hidingMap = new HidingMap();
+      const changeCallback = jasmine.createSpy('change');
 
-      indexMapper.registerMap('trimmingMap', trimmingMap);
-      indexMapper.registerMap('hidingMap', hidingMap);
+      indexMapper.addLocalHook('change', changeCallback);
+
       indexMapper.initToLength(10);
-      trimmingMap.setValues([true, false, false, false, false, false, false, false, false, true]);
-      hidingMap.setValues([false, true, true, false, false, true, true, false, true, false]);
 
-      // is renderable?  |    -  -  +  +  -  -  +  -
-      // visual          |    0  1  2  3  4  5  6  7
-      // physical        | 0  1  2  3  4  5  6  7  8  9
-
-      expect(indexMapper.getFirstNotHiddenIndex(-1, 1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(0, 1)).toBe(2);
-      expect(indexMapper.getFirstNotHiddenIndex(1, 1)).toBe(2);
-      expect(indexMapper.getFirstNotHiddenIndex(2, 1)).toBe(2);
-      expect(indexMapper.getFirstNotHiddenIndex(3, 1)).toBe(3);
-      expect(indexMapper.getFirstNotHiddenIndex(4, 1)).toBe(6);
-      expect(indexMapper.getFirstNotHiddenIndex(5, 1)).toBe(6);
-      expect(indexMapper.getFirstNotHiddenIndex(6, 1)).toBe(6);
-      expect(indexMapper.getFirstNotHiddenIndex(7, 1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(8, 1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(9, 1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(1000, 1)).toBe(null);
-
-      indexMapper.unregisterMap('trimmingMap');
-      indexMapper.unregisterMap('hidingMap');
+      expect(changeCallback.calls.count()).toEqual(1);
     });
 
-    it('should find the nearest non-hidden index searching by backward', () => {
+    it('should trigger `indexesSequenceChange` hook on initialization once', () => {
       const indexMapper = new IndexMapper();
-      const trimmingMap = new TrimmingMap();
-      const hidingMap = new HidingMap();
+      const indexesSequenceChangeCallback = jasmine.createSpy('indexesSequenceChange');
 
-      indexMapper.registerMap('trimmingMap', trimmingMap);
-      indexMapper.registerMap('hidingMap', hidingMap);
+      indexMapper.addLocalHook('indexesSequenceChange', indexesSequenceChangeCallback);
+
       indexMapper.initToLength(10);
-      trimmingMap.setValues([true, false, false, false, false, false, false, false, false, true]);
-      hidingMap.setValues([false, true, true, false, false, true, true, false, true, false]);
 
-      // is renderable?  |    -  -  +  +  -  -  +  -
-      // visual          |    0  1  2  3  4  5  6  7
-      // physical        | 0  1  2  3  4  5  6  7  8  9
-
-      expect(indexMapper.getFirstNotHiddenIndex(-1, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(0, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(1, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(2, -1)).toBe(2);
-      expect(indexMapper.getFirstNotHiddenIndex(3, -1)).toBe(3);
-      expect(indexMapper.getFirstNotHiddenIndex(4, -1)).toBe(3);
-      expect(indexMapper.getFirstNotHiddenIndex(5, -1)).toBe(3);
-      expect(indexMapper.getFirstNotHiddenIndex(6, -1)).toBe(6);
-      expect(indexMapper.getFirstNotHiddenIndex(7, -1)).toBe(6);
-      expect(indexMapper.getFirstNotHiddenIndex(8, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(9, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(1000, -1)).toBe(null);
-
-      indexMapper.unregisterMap('trimmingMap');
-      indexMapper.unregisterMap('hidingMap');
+      expect(indexesSequenceChangeCallback.calls.count()).toEqual(1);
+      expect(indexesSequenceChangeCallback).toHaveBeenCalledWith('init');
     });
 
-    it('should return `null` for an empty dataset', () => {
+    it('should trigger `indexesSequenceChange` hook after reordering elements', () => {
       const indexMapper = new IndexMapper();
-      const trimmingMap = new TrimmingMap();
-      const hidingMap = new HidingMap();
+      const indexesSequenceChangeCallback = jasmine.createSpy('indexesSequenceChange');
 
-      indexMapper.registerMap('trimmingMap', trimmingMap);
-      indexMapper.registerMap('hidingMap', hidingMap);
-      indexMapper.initToLength(0);
-      trimmingMap.setValues([]);
-      hidingMap.setValues([]);
+      indexMapper.initToLength(3);
 
-      expect(indexMapper.getFirstNotHiddenIndex(-1, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(0, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(1, -1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(-1, 1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(0, 1)).toBe(null);
-      expect(indexMapper.getFirstNotHiddenIndex(1, 1)).toBe(null);
+      indexMapper.addLocalHook('indexesSequenceChange', indexesSequenceChangeCallback);
 
-      indexMapper.unregisterMap('trimmingMap');
-      indexMapper.unregisterMap('hidingMap');
+      indexMapper.setIndexesSequence([1, 0, 2]);
+
+      expect(indexesSequenceChangeCallback.calls.count()).toEqual(1);
+      expect(indexesSequenceChangeCallback).toHaveBeenCalledWith('update');
+    });
+
+    it('should trigger `indexesSequenceChange` hook after inserting elements', () => {
+      const indexMapper = new IndexMapper();
+      const indexesSequenceChangeCallback = jasmine.createSpy('indexesSequenceChange');
+
+      indexMapper.initToLength(3);
+
+      indexMapper.addLocalHook('indexesSequenceChange', indexesSequenceChangeCallback);
+
+      indexMapper.insertIndexes(1, 3);
+
+      expect(indexesSequenceChangeCallback.calls.count()).toEqual(1);
+      expect(indexesSequenceChangeCallback).toHaveBeenCalledWith('insert');
+    });
+
+    it('should trigger `indexesSequenceChange` hook after removing elements', () => {
+      const indexMapper = new IndexMapper();
+      const indexesSequenceChangeCallback = jasmine.createSpy('indexesSequenceChange');
+
+      indexMapper.initToLength(3);
+
+      indexMapper.addLocalHook('indexesSequenceChange', indexesSequenceChangeCallback);
+
+      indexMapper.removeIndexes([0, 1]);
+
+      expect(indexesSequenceChangeCallback.calls.count()).toEqual(1);
+      expect(indexesSequenceChangeCallback).toHaveBeenCalledWith('remove');
+    });
+
+    it('should trigger `indexesSequenceChange` hook after moving elements', () => {
+      const indexMapper = new IndexMapper();
+      const indexesSequenceChangeCallback = jasmine.createSpy('indexesSequenceChange');
+
+      indexMapper.initToLength(10);
+
+      indexMapper.addLocalHook('indexesSequenceChange', indexesSequenceChangeCallback);
+
+      indexMapper.moveIndexes([0, 1], 3);
+
+      expect(indexesSequenceChangeCallback.calls.count()).toEqual(1);
+      expect(indexesSequenceChangeCallback).toHaveBeenCalledWith('move');
     });
   });
 

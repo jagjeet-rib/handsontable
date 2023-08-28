@@ -3,7 +3,7 @@ import Hooks from '../../pluginHooks';
 import { offset, outerHeight, outerWidth } from '../../helpers/dom/element';
 import { arrayEach, arrayMap } from '../../helpers/array';
 import EventManager from '../../eventManager';
-import { getDeltas, getDragDirectionAndRange, DIRECTIONS, getMappedFillHandleSetting } from './utils';
+import { getDragDirectionAndRange, DIRECTIONS, getMappedFillHandleSetting } from './utils';
 
 Hooks.getSingleton().register('modifyAutofillRange');
 Hooks.getSingleton().register('beforeAutofill');
@@ -12,7 +12,7 @@ Hooks.getSingleton().register('afterAutofill');
 export const PLUGIN_KEY = 'autofill';
 export const PLUGIN_PRIORITY = 20;
 const SETTING_KEYS = ['fillHandle'];
-const INSERT_ROW_ALTER_ACTION_NAME = 'insert_row';
+const INSERT_ROW_ALTER_ACTION_NAME = 'insert_row_below';
 const INTERVAL_FOR_ADDING_ROW = 200;
 
 /* eslint-disable jsdoc/require-description-complete-sentence */
@@ -269,8 +269,6 @@ export class Autofill extends BasePlugin {
         return false;
       }
 
-      const deltas = getDeltas(startOfDragCoords, endOfDragCoords, selectionData, directionOfDrag);
-
       let fillData = beforeAutofillHookResult;
       const res = beforeAutofillHookResult;
 
@@ -310,9 +308,7 @@ export class Autofill extends BasePlugin {
         endOfDragCoords.row,
         endOfDragCoords.col,
         `${this.pluginName}.fill`,
-        null,
-        directionOfDrag,
-        deltas
+        null
       );
 
       this.setSelection(cornersOfSelectionAndDragAreas);

@@ -1,15 +1,21 @@
 ---
+id: ffimaicc
 title: Modules
-metaTitle: Modules - Guide - Handsontable Documentation
+metaTitle: Modules - JavaScript Data Grid | Handsontable
+description: Reduce the size of your JavaScript bundle, by importing only the modules that you need. The base module is mandatory, all other modules are optional.
 permalink: /modules
 canonicalUrl: /modules
 tags:
   - tree shaking
+react:
+  id: weudz1vh
+  metaTitle: Modules - React Data Grid | Handsontable
+searchCategory: Guides
 ---
 
 # Modules
 
-Import just the modules that you actually use, to reduce Handsontable's bundle size.
+Reduce the size of your JavaScript bundle, by importing only the modules that you need. The base module is mandatory, all other modules are optional.
 
 [[toc]]
 
@@ -25,14 +31,6 @@ To get the most out of using Handsontable's modules:
 1. Import the [base module](#base-module).
 2. Import [optional modules](#optional-modules) of your choice.
 3. Remove redundant code (so-called tree shaking).
-
-#### Use modules in frameworks
-
-To find out how to use modules with Handsontable's framework wrappers, see the following guides:
-- [Modules in React](@/guides/integrate-with-react/react-modules.md)
-- [Modules in Angular](@/guides/integrate-with-angular/angular-modules.md)
-- [Modules in Vue 2](@/guides/integrate-with-vue/vue-modules.md)
-- [Modules in Vue 3](@/guides/integrate-with-vue3/vue3-modules.md)
 
 #### Bundler support
 
@@ -54,7 +52,17 @@ No matter which of the optional modules you use, you always need to import the b
 
 ### Import the base module
 
+::: only-for javascript
+
 To get the base JavaScript module, import Handsontable from `handsontable/base` (not from `handsontable`, which would give you the [full distribution package](@/guides/tools-and-building/packages.md)):
+
+:::
+
+::: only-for react
+
+To get the base JavaScript module, import Handsontable from `handsontable/base` (not from `handsontable`, which would give you the full distribution package):
+
+:::
 
 ```js
 import Handsontable from 'handsontable/base';
@@ -95,6 +103,7 @@ import {
 Each cell type module contains a different cell type:
 
 ::: details Cell type modules
+
 | Module                 | Cell type alias |
 | ---------------------- | --------------- |
 | `AutocompleteCellType` | `autocomplete`  |
@@ -106,6 +115,7 @@ Each cell type module contains a different cell type:
 | `PasswordCellType`     | `password`      |
 | `TextCellType`         | `text`          |
 | `TimeCellType`         | `time`          |
+
 :::
 
 #### Import a cell type module
@@ -146,14 +156,18 @@ Each cell type module is made of:
 - A [validator](@/guides/cell-functions/cell-validator.md) module (optionally)
 
 ::: tip
+
 To find out which renderer, editor, and validator a given cell type is made of,
 see the API reference of the [`type`](@/api/options.md#type) configuration option.
+
 :::
 
 You can import renderer, editor, and validator modules individually.
 For the full list of those modules, see the [List of all modules](#list-of-all-modules) section.
 
 For example, you can import the `numeric` cell type as a whole:
+
+::: only-for javascript
 
 ```js
 import Handsontable from 'handsontable/base';
@@ -175,7 +189,36 @@ new Handsontable(container, {
 });
 ```
 
+:::
+
+::: only-for react
+
+```jsx
+import Handsontable from 'handsontable/base';
+import { HotTable } from '@handsontable/react';
+import {
+  registerCellType,
+  NumericCellType,
+} from 'handsontable/cellTypes';
+
+registerCellType(NumericCellType);
+
+const container = document.querySelector('#example1');
+
+<HotTable
+  columns={[
+    {
+      type: 'numeric'
+    }
+  ]}
+/>
+```
+
+:::
+
 Or, you can import the `numeric` cell type's renderer, editor, and validator individually (the effect is the same as above):
+
+::: only-for javascript
 
 ```js
 import Handsontable from 'handsontable/base';
@@ -196,8 +239,6 @@ registerRenderer(numericRenderer);
 registerEditor(NumericEditor);
 registerValidator(numericValidator);
 
-const container = document.querySelector('#example1');
-
 new Handsontable(container, {
   columns: [
     {
@@ -205,10 +246,51 @@ new Handsontable(container, {
       editor: 'numeric',
       validator: 'numeric',
       dataType: 'number',
+      type: 'numeric',
     }
   ]
 });
 ```
+
+:::
+
+::: only-for react
+
+```jsx
+import Handsontable from 'handsontable/base';
+import { HotTable } from '@handsontable/react';
+import {
+  registerRenderer,
+  numericRenderer,
+} from 'handsontable/renderers';
+import {
+  registerEditor,
+  NumericEditor,
+} from 'handsontable/editors';
+import {
+  registerValidator,
+  numericValidator,
+} from 'handsontable/validators';
+
+registerRenderer(numericRenderer);
+registerEditor(NumericEditor);
+registerValidator(numericValidator);
+
+<HotTable
+  columns={[
+    {
+      renderer: 'numeric',
+      editor: 'numeric',
+      validator: 'numeric',
+      dataType: 'number',
+      type: 'numeric',
+    }
+  ]}
+/>
+
+```
+
+:::
 
 ### Plugin modules
 
@@ -259,6 +341,7 @@ import {
 Each plugin module contains a different plugin:
 
 ::: details Plugin modules
+
 | Module                     | Plugin                                                |
 | -------------------------- | ----------------------------------------------------- |
 | `AutoColumnSize`           | [`AutoColumnSize`](@/api/autoColumnSize.md)           |
@@ -295,6 +378,7 @@ Each plugin module contains a different plugin:
 | `TouchScroll`              | `TouchScroll`                                         |
 | `TrimRows`                 | [`TrimRows`](@/api/trimRows.md)                       |
 | `UndoRedo`                 | [`UndoRedo`](@/api/undoRedo.md)                       |
+
 :::
 
 #### Import a plugin module
@@ -358,6 +442,7 @@ import {
 Each translation module contains a different translation package:
 
 ::: details Translation modules
+
 | Module | Translation                 |
 | ------ | --------------------------- |
 | `deCH` | German - Switzerland        |
@@ -376,6 +461,7 @@ Each translation module contains a different translation package:
 | `ruRU` | Russian - Russia            |
 | `zhCN` | Chinese - China             |
 | `zhTW` | Chinese - Taiwan            |
+
 :::
 
 #### Import a translation module
@@ -433,6 +519,7 @@ To quickly register all modules in bulk, use these registering functions:
 - `registerAllModules()`
 
 ::: details Import and register all modules in bulk
+
 ```js
 // the base module
 import Handsontable from 'handsontable/base';
@@ -588,6 +675,7 @@ registerLanguageDictionary(zhTW);
 // or, register all of Handsontable's modules at once
 registerAllModules();
 ```
+
 :::
 
 To register individual modules explicitly, use these registering functions:
@@ -599,6 +687,7 @@ To register individual modules explicitly, use these registering functions:
 - `registerLanguageDictionary()`
 
 ::: details Import and register all modules explicitly
+
 ```js
 // the base module
 import Handsontable from 'handsontable/base';
@@ -805,12 +894,17 @@ registerLanguageDictionary(ruRU);
 registerLanguageDictionary(zhCN);
 registerLanguageDictionary(zhTW);
 ```
+
 :::
 
 ::: tip
+
 Parcel, webpack 3 (and older), and a few other bundlers require you to import modules one by one, from their respective files of origin. See the full list of such imports:
 
+:::
+
 ::: details All imports
+
 ```js
 import { registerCellType } from 'handsontable/cellTypes/registry';
 import { AutocompleteCellType } from 'handsontable/cellTypes/autocompleteType';
@@ -885,6 +979,19 @@ import { UndoRedo } from 'handsontable/plugins/undoRedo';
 
 import { registerLanguageDictionary } from 'handsontable/i18n/registry';
 ```
+
+:::
+
+::: only-for javascript
+
+## Using modules with frameworks
+
+You can also use modules with Handsontable's framework wrappers:
+- [Using modules with React](@/react/guides/tools-and-building/modules.md)
+- [Using modules with Angular](@/guides/integrate-with-angular/angular-modules.md)
+- [Using modules with Vue 2](@/guides/integrate-with-vue/vue-modules.md)
+- [Using modules with Vue 3](@/guides/integrate-with-vue3/vue3-modules.md)
+
 :::
 
 ## Related articles
@@ -893,10 +1000,15 @@ import { registerLanguageDictionary } from 'handsontable/i18n/registry';
 
 - [Bundle size](@/guides/optimization/bundle-size.md)
 - [Installation](@/guides/getting-started/installation.md)
-- [Modules in React](@/guides/integrate-with-react/react-modules.md)
+
+::: only-for javascript
+
+- [Modules in React](@/react/guides/tools-and-building/modules.md)
 - [Modules in Angular](@/guides/integrate-with-angular/angular-modules.md)
 - [Modules in Vue 2](@/guides/integrate-with-vue/vue-modules.md)
 - [Modules in Vue 3](@/guides/integrate-with-vue3/vue3-modules.md)
+
+:::
 
 ### Related blog articles
 

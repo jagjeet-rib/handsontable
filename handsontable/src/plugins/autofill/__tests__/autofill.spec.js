@@ -506,6 +506,38 @@ describe('AutoFill', () => {
     });
   });
 
+  describe('beforeChange hook autofill value overrides', () => {
+    it('should use a custom value when introducing changes', () => {
+      handsontable({
+        data: [
+          [1, 2, 3, 4, 5, 6],
+          [1, 2, 3, 4, 5, 6],
+          [1, 2, 3, 4, 5, 6],
+          [1, 2, 3, 4, 5, 6],
+        ],
+        beforeChange(changes) {
+          changes[0][3] = 'test2';
+          changes[1][3] = 'test3';
+          changes[2][3] = 'test4';
+        }
+      });
+      selectCell(0, 0);
+
+      spec().$container.find('.wtBorder.corner').simulate('mousedown');
+      spec().$container.find('tr:eq(1) td:eq(0)').simulate('mouseover');
+      spec().$container.find('tr:eq(3) td:eq(0)').simulate('mouseover');
+      spec().$container.find('.wtBorder.corner').simulate('mouseup');
+
+      expect(getSelected()).toEqual([[0, 0, 3, 0]]);
+      expect(getData()).toEqual([
+        [1, 2, 3, 4, 5, 6],
+        ['test2', 2, 3, 4, 5, 6],
+        ['test3', 2, 3, 4, 5, 6],
+        ['test4', 2, 3, 4, 5, 6]
+      ]);
+    });
+  });
+
   it('should pass correct arguments to `afterAutofill`', () => {
     const afterAutofill = jasmine.createSpy();
 
@@ -777,7 +809,7 @@ describe('AutoFill', () => {
   });
 
   it('should add new row after dragging the handle to the last table row', async() => {
-    const hot = handsontable({
+    handsontable({
       data: [
         [1, 2, 'test', 4, 5, 6],
         [1, 2, 3, 4, 5, 6],
@@ -792,19 +824,28 @@ describe('AutoFill', () => {
     spec().$container.find('.wtBorder.current.corner').simulate('mousedown');
     spec().$container.find('tr:last-child td:eq(2)').simulate('mouseover');
 
-    expect(hot.countRows()).toBe(4);
+    expect(countRows()).toBe(4);
 
     await sleep(300);
-    expect(hot.countRows()).toBe(5);
+    expect(countRows()).toBe(5);
 
     spec().$container.find('tr:last-child td:eq(2)').simulate('mouseover');
 
     await sleep(300);
-    expect(hot.countRows()).toBe(6);
+    expect(countRows()).toBe(6);
+
+    expect(getData()).toEqual([
+      [1, 2, 'test', 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+    ]);
   });
 
   it('should add new row after dragging the handle to the last table row (autoInsertRow as true)', async() => {
-    const hot = handsontable({
+    handsontable({
       data: [
         [1, 2, 'test', 4, 5, 6],
         [1, 2, 3, 4, 5, 6],
@@ -821,15 +862,24 @@ describe('AutoFill', () => {
     spec().$container.find('.wtBorder.current.corner').simulate('mousedown');
     spec().$container.find('tr:last-child td:eq(2)').simulate('mouseover');
 
-    expect(hot.countRows()).toBe(4);
+    expect(countRows()).toBe(4);
 
     await sleep(300);
-    expect(hot.countRows()).toBe(5);
+    expect(countRows()).toBe(5);
 
     spec().$container.find('tr:last-child td:eq(2)').simulate('mouseover');
 
     await sleep(300);
-    expect(hot.countRows()).toBe(6);
+    expect(countRows()).toBe(6);
+
+    expect(getData()).toEqual([
+      [1, 2, 'test', 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [null, null, null, null, null, null],
+      [null, null, null, null, null, null],
+    ]);
   });
 
   it('should add new row after dragging the handle to the last table row (autoInsertRow as true, vertical)', async() => {

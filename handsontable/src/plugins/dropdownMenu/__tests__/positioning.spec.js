@@ -6,13 +6,11 @@ describe('DropdownMenu', () => {
     const id = 'testContainer';
 
     beforeEach(function() {
-      $('.jasmine_html-reporter').hide();
       $('html').attr('dir', htmlDir);
       this.$container = $(`<div id="${id}"></div>`).appendTo('body');
     });
 
     afterEach(function() {
-      $('.jasmine_html-reporter').show();
       $('html').attr('dir', 'ltr');
 
       if (this.$container) {
@@ -116,6 +114,27 @@ describe('DropdownMenu', () => {
         expect(subMenuOffset.top).toBeCloseTo(subMenuItemOffset.top - 1, 0);
         expect(subMenuOffset.left).toBeCloseTo(dropdownOffset.left - $dropdownMenu.outerWidth(), 0);
       });
+    });
+
+    it('should show tick from "Read only" element at proper place', () => {
+      handsontable({
+        layoutDirection,
+        data: createSpreadsheetData(10, 10),
+        dropdownMenu: true,
+        colHeaders: true,
+        readOnly: true,
+      });
+
+      dropdownMenu(0);
+
+      const $readOnlyItem = $('.htDropdownMenu .ht_master .htCore td:contains(Read only)');
+      const $tickItem = $readOnlyItem.find('span.selected');
+      const tickItemOffset = $tickItem.offset();
+      const $dropdownMenuRoot = $('.htDropdownMenu');
+      const dropdownMenuOffset = $dropdownMenuRoot.offset();
+
+      expect(tickItemOffset.top).toBe(135);
+      expect(tickItemOffset.left).toBe(dropdownMenuOffset.left + 4);
     });
   });
 });

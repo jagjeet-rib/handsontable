@@ -1,6 +1,8 @@
 ---
+id: 9xuz0x0c
 title: Folder structure
-metaTitle: Folder structure - Guide - Handsontable Documentation
+metaTitle: Folder structure - JavaScript Data Grid | Handsontable
+description: The folder structure of Handsontable's code repository.
 permalink: /folder-structure
 canonicalUrl: /folder-structure
 tags:
@@ -10,11 +12,17 @@ tags:
   - file structure
   - folders
   - files
+react:
+  id: 29dbr0lt
+  metaTitle: Folder structure - React Data Grid | Handsontable
+searchCategory: Guides
 ---
 
 # Folder structure
 
-Handsontable's source files are stored on GitHub, in a mono repository.
+Handsontable's source files are stored on GitHub, in a monorepo.
+
+[[toc]]
 
 ```bash
 ├── bin                                     # Binary files
@@ -29,6 +37,7 @@ Handsontable's source files are stored on GitHub, in a mono repository.
     └── types                               # Handsontable TypeScript definitions files
 ├── resources                               # Static files for README.md
 ├── scripts                                 # Monorepo scripts
+├── visual-tests                            # Automated visual regression tests
 └── wrappers                                # Wrapper files
     ├── angular                             # Wrapper for Angular
     ├── react                               # Wrapper for React

@@ -16,23 +16,23 @@ describe('Core.emptySelectedCells', () => {
       selectionMode: 'multiple',
     });
 
-    $(getCell(5, 4)).simulate('mousedown');
-    $(getCell(1, 1)).simulate('mouseover');
-    $(getCell(1, 1)).simulate('mouseup');
+    mouseDown(getCell(5, 4));
+    mouseOver(getCell(1, 1));
+    mouseUp(getCell(1, 1));
 
     keyDown('control/meta');
 
-    $(getCell(2, 2)).simulate('mousedown');
-    $(getCell(7, 2)).simulate('mouseover');
-    $(getCell(7, 2)).simulate('mouseup');
+    mouseDown(getCell(2, 2));
+    mouseOver(getCell(7, 2));
+    mouseUp(getCell(7, 2));
 
-    $(getCell(2, 4)).simulate('mousedown');
-    $(getCell(2, 4)).simulate('mouseover');
-    $(getCell(2, 4)).simulate('mouseup');
+    mouseDown(getCell(2, 4));
+    mouseOver(getCell(2, 4));
+    mouseUp(getCell(2, 4));
 
-    $(getCell(7, 6)).simulate('mousedown');
-    $(getCell(8, 7)).simulate('mouseover');
-    $(getCell(8, 7)).simulate('mouseup');
+    mouseDown(getCell(7, 6));
+    mouseOver(getCell(8, 7));
+    mouseUp(getCell(8, 7));
 
     keyUp('control/meta');
 
@@ -128,5 +128,30 @@ describe('Core.emptySelectedCells', () => {
     emptySelectedCells();
 
     expect(onBeforeChange).not.toHaveBeenCalled();
+  });
+
+  it('should override cleared values using `beforeChange` hook', () => {
+    handsontable({
+      data: [
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+      ],
+      beforeChange(changes) {
+        changes[0][3] = 'test';
+      }
+    });
+
+    selectCells([[0, 0, 2, 2]]);
+
+    emptySelectedCells();
+
+    expect(getData()).toEqual([
+      ['test', null, null, 4, 5, 6],
+      [null, null, null, 4, 5, 6],
+      [null, null, null, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+    ]);
   });
 });

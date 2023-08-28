@@ -25,8 +25,8 @@
  * INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER ARISING FROM
  * USE OR INABILITY TO USE THIS SOFTWARE.
  * 
- * Version: 12.1.3
- * Release date: 28/09/2022 (built at 28/09/2022 15:55:36)
+ * Version: 13.0.0
+ * Release date: 22/06/2023 (built at 22/06/2023 12:51:30)
  */
 /**
  * Fix for bootstrap styles
@@ -396,7 +396,7 @@ innerBorderBottom - Property controlled by bottom overlay
   white-space: nowrap;
 }
 
-#hot-display-license-info {
+.hot-display-license-info {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Helvetica Neue", Arial, sans-serif;
   font-size: 10px;
   font-weight: normal;
@@ -405,7 +405,7 @@ innerBorderBottom - Property controlled by bottom overlay
   text-align: left;
 }
 
-#hot-display-license-info a {
+.hot-display-license-info a {
   color: #104acc;
   font-size: 10px;
 }
@@ -482,9 +482,7 @@ innerBorderBottom - Property controlled by bottom overlay
 .handsontable .columnSorting.sortAction:hover {
   text-decoration: underline;
   cursor: pointer;
-}
-
-/* Arrow position */
+} /* Arrow position */
 .handsontable span.colHeader.columnSorting::before {
   /* Centering start */
   top: 50%;
@@ -560,20 +558,20 @@ innerBorderBottom - Property controlled by bottom overlay
   right: 0;
   bottom: 0;
   /* Fix for IE9 to spread the ":before" pseudo element to 100% height of the parent element */
-  bottom: -100%;
+  bottom: -100% \9 ;
   background: #005eff;
 }
 
 /* Fix for IE10 and IE11 to spread the ":before" pseudo element to 100% height of the parent element */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .handsontable td.area:before,
-.handsontable td.area-1:before,
-.handsontable td.area-2:before,
-.handsontable td.area-3:before,
-.handsontable td.area-4:before,
-.handsontable td.area-5:before,
-.handsontable td.area-6:before,
-.handsontable td.area-7:before {
+  .handsontable td.area-1:before,
+  .handsontable td.area-2:before,
+  .handsontable td.area-3:before,
+  .handsontable td.area-4:before,
+  .handsontable td.area-5:before,
+  .handsontable td.area-6:before,
+  .handsontable td.area-7:before {
     bottom: -100%;
   }
 }
@@ -867,249 +865,6 @@ TextRenderer placeholder value
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
-@charset "UTF-8";
-/*!
- * Pikaday
- * Copyright © 2014 David Bushell | BSD & MIT license | https://dbushell.com/
- */
-.pika-single {
-  z-index: 9999;
-  display: block;
-  position: relative;
-  color: #333;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-bottom-color: #bbb;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-/*
-clear child float (pika-lendar), using the famous micro clearfix hack
-http://nicolasgallagher.com/micro-clearfix-hack/
-*/
-.pika-single:before,
-.pika-single:after {
-  content: " ";
-  display: table;
-}
-
-.pika-single:after {
-  clear: both;
-}
-
-.pika-single {
-  *zoom: 1;
-}
-
-.pika-single.is-hidden {
-  display: none;
-}
-
-.pika-single.is-bound {
-  position: absolute;
-  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
-}
-
-.pika-lendar {
-  float: left;
-  width: 240px;
-  margin: 8px;
-}
-
-.pika-title {
-  position: relative;
-  text-align: center;
-}
-
-.pika-label {
-  display: inline-block;
-  *display: inline;
-  position: relative;
-  z-index: 9999;
-  overflow: hidden;
-  margin: 0;
-  padding: 5px 3px;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: bold;
-  background-color: #fff;
-}
-
-.pika-title select {
-  cursor: pointer;
-  position: absolute;
-  z-index: 9998;
-  margin: 0;
-  left: 0;
-  top: 5px;
-  filter: alpha(opacity=0);
-  opacity: 0;
-}
-
-.pika-prev,
-.pika-next {
-  display: block;
-  cursor: pointer;
-  position: relative;
-  outline: none;
-  border: 0;
-  padding: 0;
-  width: 20px;
-  height: 30px;
-  /* hide text using text-indent trick, using width value (it's enough) */
-  text-indent: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  background-color: transparent;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 75% 75%;
-  opacity: 0.5;
-  *position: absolute;
-  *top: 0;
-}
-
-.pika-prev:hover,
-.pika-next:hover {
-  opacity: 1;
-}
-
-.pika-prev,
-.is-rtl .pika-next {
-  float: left;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAUklEQVR42u3VMQoAIBADQf8Pgj+OD9hG2CtONJB2ymQkKe0HbwAP0xucDiQWARITIDEBEnMgMQ8S8+AqBIl6kKgHiXqQqAeJepBo/z38J/U0uAHlaBkBl9I4GwAAAABJRU5ErkJggg==");
-  *left: 0;
-}
-
-.pika-next,
-.is-rtl .pika-prev {
-  float: right;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAU0lEQVR42u3VOwoAMAgE0dwfAnNjU26bYkBCFGwfiL9VVWoO+BJ4Gf3gtsEKKoFBNTCoCAYVwaAiGNQGMUHMkjGbgjk2mIONuXo0nC8XnCf1JXgArVIZAQh5TKYAAAAASUVORK5CYII=");
-  *right: 0;
-}
-
-.pika-prev.is-disabled,
-.pika-next.is-disabled {
-  cursor: default;
-  opacity: 0.2;
-}
-
-.pika-select {
-  display: inline-block;
-  *display: inline;
-}
-
-.pika-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border: 0;
-}
-
-.pika-table th,
-.pika-table td {
-  width: 14.2857142857%;
-  padding: 0;
-}
-
-.pika-table th {
-  color: #999;
-  font-size: 12px;
-  line-height: 25px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.pika-button {
-  cursor: pointer;
-  display: block;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  border: 0;
-  margin: 0;
-  width: 100%;
-  padding: 5px;
-  color: #666;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: right;
-  background: #f5f5f5;
-}
-
-.pika-week {
-  font-size: 11px;
-  color: #999;
-}
-
-.is-today .pika-button {
-  color: #33aaff;
-  font-weight: bold;
-}
-
-.is-selected .pika-button,
-.has-event .pika-button {
-  color: #fff;
-  font-weight: bold;
-  background: #33aaff;
-  box-shadow: inset 0 1px 3px #178fe5;
-  border-radius: 3px;
-}
-
-.has-event .pika-button {
-  background: #005da9;
-  box-shadow: inset 0 1px 3px #0076c9;
-}
-
-.is-disabled .pika-button,
-.is-inrange .pika-button {
-  background: #D5E9F7;
-}
-
-.is-startrange .pika-button {
-  color: #fff;
-  background: #6CB31D;
-  box-shadow: none;
-  border-radius: 3px;
-}
-
-.is-endrange .pika-button {
-  color: #fff;
-  background: #33aaff;
-  box-shadow: none;
-  border-radius: 3px;
-}
-
-.is-disabled .pika-button {
-  pointer-events: none;
-  cursor: default;
-  color: #999;
-  opacity: 0.3;
-}
-
-.is-outside-current-month .pika-button {
-  color: #999;
-  opacity: 0.3;
-}
-
-.is-selection-disabled {
-  pointer-events: none;
-  cursor: default;
-}
-
-.pika-button:hover,
-.pika-row.pick-whole-week:hover .pika-button {
-  color: #fff;
-  background: #ff8000;
-  box-shadow: none;
-  border-radius: 3px;
-}
-
-/* styling for abbr */
-.pika-table abbr {
-  border-bottom: none;
-  cursor: help;
-}
 /*
 AutocompleteRenderer down arrow
 */
@@ -1309,10 +1064,21 @@ CheckboxRenderer
   margin-right: 6px;
 }
 
+[dir=rtl].htContextMenu table tbody tr td .htItemWrapper {
+  margin-right: 10px;
+  margin-left: 6px;
+}
+
 .htContextMenu table tbody tr td div span.selected {
   margin-top: -2px;
   position: absolute;
   left: 4px;
+  right: 0;
+}
+
+[dir=rtl].htContextMenu table tbody tr td div span.selected {
+  right: 4px;
+  left: 0;
 }
 
 .htContextMenu .ht_master .wtHolder {
@@ -1447,10 +1213,21 @@ textarea.HandsontableCopyPaste {
   margin-right: 10px;
 }
 
+[dir=rtl].htDropdownMenu table tbody tr td .htItemWrapper {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .htDropdownMenu table tbody tr td div span.selected {
   margin-top: -2px;
   position: absolute;
   left: 4px;
+  right: 0;
+}
+
+[dir=rtl].htDropdownMenu table tbody tr td div span.selected {
+  right: 4px;
+  left: 0;
 }
 
 .htDropdownMenu .ht_master .wtHolder {
@@ -1468,8 +1245,10 @@ textarea.HandsontableCopyPaste {
 }
 
 .htFiltersConditionsMenu .ht_clone_top,
+.htFiltersConditionsMenu .ht_clone_bottom,
 .htFiltersConditionsMenu .ht_clone_inline_start,
-.htFiltersConditionsMenu .ht_clone_corner {
+.htFiltersConditionsMenu .ht_clone_top_inline_start_corner,
+.htFiltersConditionsMenu .ht_clone_bottom_inline_start_corner {
   display: none;
 }
 
@@ -1820,28 +1599,24 @@ textarea.HandsontableCopyPaste {
 
 .handsontable th.beforeHiddenColumn::after {
   right: 1px;
-  content: "◀";
-  /* left arrow */
+  content: "◀"; /* left arrow */
 }
 
 [dir=rtl].handsontable th.beforeHiddenColumn::after {
   right: initial;
   left: 1px;
-  content: "▶";
-  /* right arrow */
+  content: "▶"; /* right arrow */
 }
 
 .handsontable th.afterHiddenColumn::before {
   left: 1px;
-  content: "▶";
-  /* right arrow */
+  content: "▶"; /* right arrow */
 }
 
 [dir=rtl].handsontable th.afterHiddenColumn::before {
   right: 1px;
   left: initial;
-  content: "◀";
-  /* left arrow */
+  content: "◀"; /* left arrow */
 }
 @charset "UTF-8";
 /*!

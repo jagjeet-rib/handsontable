@@ -6,13 +6,11 @@ describe('ContextMenu', () => {
     const id = 'testContainer';
 
     beforeEach(function() {
-      $('.jasmine_html-reporter').hide();
       $('html').attr('dir', htmlDir);
       this.$container = $(`<div id="${id}"></div>`).appendTo('body');
     });
 
     afterEach(function() {
-      $('.jasmine_html-reporter').show();
       $('html').attr('dir', 'ltr');
 
       if (this.$container) {
@@ -274,6 +272,30 @@ describe('ContextMenu', () => {
         expect(subMenuOffset.left)
           .toBeCloseTo(contextMenuOffset.left - contextMenuRoot.outerWidth(), 0);
       });
+    });
+
+    it('should show tick from "Read only" element at proper place', () => {
+      handsontable({
+        layoutDirection,
+        data: createSpreadsheetData(10, 10),
+        contextMenu: true,
+        readOnly: true,
+      });
+
+      selectCell(0, 0);
+
+      const cell = getCell(0, 0);
+
+      contextMenu(cell);
+
+      const $readOnlyItem = $('.htContextMenu .ht_master .htCore td:contains(Read only)');
+      const $tickItem = $readOnlyItem.find('span.selected');
+      const tickItemOffset = $tickItem.offset();
+      const $contextMenuRoot = $('.htContextMenu');
+      const contextMenuOffset = $contextMenuRoot.offset();
+
+      expect(tickItemOffset.top).toBe(216);
+      expect(tickItemOffset.left).toBe(contextMenuOffset.left + 4);
     });
   });
 });
