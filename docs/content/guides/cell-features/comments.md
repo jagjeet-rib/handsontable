@@ -31,7 +31,9 @@ const hot = new Handsontable(container, {
     ['A1', 'B1', 'C1'],
     ['A2', 'B2', 'C2'],
   ],
-  comments: true
+  comments: true,
+  autoWrapRow: true,
+  autoWrapCol: true
 });
 ```
 
@@ -114,6 +116,8 @@ const hot = new Handsontable(container, {
     { row: 2, col: 2, comment: { value: 'More comments' } }
   ],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 ```
@@ -154,6 +158,8 @@ export const ExampleComponent = () => {
         { row: 2, col: 2, comment: { value: 'More comments' } }
       ]}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -197,6 +203,8 @@ const hot = new Handsontable(container, {
     { row: 0, col: 3, comment: { value: 'You can edit this comment' } }
   ],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 ```
@@ -235,6 +243,8 @@ export const ExampleComponent = () => {
         { row: 0, col: 3, comment: { value: 'You can edit this comment' } }
       ]}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -279,6 +289,8 @@ const hot = new Handsontable(container, {
     { row: 2, col: 2, comment: { value: 'Comment 200x50 px', style: { width: 200, height: 50 } } }
   ],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 ```
@@ -318,6 +330,8 @@ export const ExampleComponent = () => {
         { row: 2, col: 2, comment: { value: 'Comment 200x50 px', style: { width: 200, height: 50 } } }
       ]}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -363,6 +377,8 @@ const hot = new Handsontable(container, {
     { row: 1, col: 1, comment: { value: 'Some comment' } },
   ],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 ```
@@ -403,6 +419,8 @@ export const ExampleComponent = () => {
         { row: 1, col: 1, comment: { value: 'Some comment' } },
       ]}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -416,6 +434,14 @@ ReactDOM.render(<ExampleComponent />, document.getElementById('example4'));
 :::
 
 :::
+
+## Related keyboard shortcuts
+
+| Windows                                                 | macOS                                                      | Action                                  |  Excel  | Sheets  |
+| ------------------------------------------------------- | ---------------------------------------------------------- | --------------------------------------- | :-----: | :-----: |
+| <kbd>**Ctrl**</kbd>+<kbd>**Alt**</kbd>+<kbd>**M**</kbd> | <kbd>**Ctrl**</kbd>+<kbd>**Option**</kbd>+<kbd>**M**</kbd> | Add or edit a comment                   | &cross; | &check; |
+| <kbd>**Ctrl**</kbd>+<kbd>**Enter**</kbd>                | <kbd>**Cmd**</kbd>+<kbd>**Enter**</kbd>                    | Save and exit the current comment       | &cross; | &check; |
+| <kbd>**Escape**</kbd>                                   | <kbd>**Escape**</kbd>                                      | Exit the current comment without saving | &cross; | &cross; |
 
 ## Related API reference
 

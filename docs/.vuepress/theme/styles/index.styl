@@ -181,10 +181,6 @@ a.source-code-link {
       vertical-align: top;
     }
   }
-
-  code {
-    white-space: nowrap;
-  }
 }
 
 /* Larger bottom gap of H1, H2, H3 */
@@ -235,6 +231,10 @@ h1, h2, h3, h4, h5 {
     visibility: 'hidden';
   }
 
+  a.header-anchor:focus {
+    opacity: 1;
+  }
+
   &:hover {
     visibility: 'visible';
   }
@@ -252,6 +252,7 @@ h1, h2, h3, h4, h5 {
 
 a {
   color: #104bcd;
+  font-weight: 400;
 }
 
 /* A div that makes the table scrollable used in the /setting-options page */

@@ -36,7 +36,7 @@ Disabling a cell makes the cell read-only or non-editable. Both have similar out
 
 ## Read-only columns
 
-In many use cases, you will need to configure a certain column to be read-only. This column will be available for keyboard navigation and copying data (<kbd>**Ctrl**</kbd>/<kbd>**Cmd**</kbd> + <kbd>**C**</kbd>). Editing and pasting data will be disabled.
+In many use cases, you will need to configure a certain column to be read-only. This column will be available for keyboard navigation and copying data (<kbd>**Ctrl**</kbd>/<kbd>**Cmd**</kbd>+<kbd>**C**</kbd>). Editing and pasting data will be disabled.
 
 To make a column read-only, declare it in the [`columns`](@/api/options.md#columns) configuration option. You can also define a special renderer function that will dim the read-only values, providing a visual cue for the user that the cells are read-only.
 
@@ -73,7 +73,9 @@ const hot = new Handsontable(container, {
     {
       data: 'bumper'
     }
-  ]
+  ],
+  autoWrapRow: true,
+  autoWrapCol: true
 });
 ```
 
@@ -104,6 +106,8 @@ export const ExampleComponent = () => {
       ]}
       height="auto"
       colHeaders={['Car', 'Year', 'Chassis color', 'Bumper color']}
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
       columns={[
         {
@@ -155,6 +159,8 @@ const hot = new Handsontable(container, {
   ],
   colHeaders: ['Car', 'Year', 'Chassis color', 'Bumper color'],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 
@@ -218,6 +224,8 @@ export const ExampleComponent = () => {
       ]}
       colHeaders={['Car', 'Year', 'Chassis color', 'Bumper color']}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -236,7 +244,7 @@ Non-editable cells behave like any other cells apart from preventing you from ma
 
 ## Non-editable columns
 
-In many cases, you will need to configure a certain column to be non-editable. Doing this does not change its basic behaviour, apart from editing. This means that you can still use the keyboard navigation <kbd>**Ctrl**</kbd>/<kbd>**Cmd**</kbd> + <kbd>**C**</kbd>, and <kbd>**Ctrl**</kbd>/<kbd>**Cmd**</kbd> + <kbd>**V**</kbd> functionalities, and drag-to-fill, etc.
+In many cases, you will need to configure a certain column to be non-editable. Doing this does not change its basic behaviour, apart from editing. This means that you can still use the keyboard navigation <kbd>**Ctrl**</kbd>/<kbd>**Cmd**</kbd>+<kbd>**C**</kbd>, and <kbd>**Ctrl**</kbd>/<kbd>**Cmd**</kbd>+<kbd>**V**</kbd> functionalities, and drag-to-fill, etc.
 
 To make a column non-editable, declare it in the [`columns`](@/api/options.md#columns) configuration option. You can also define a special renderer function that will dim the `editor` value. This will provide the user with a visual cue that the cell is non-editable.
 
@@ -276,7 +284,9 @@ const hot = new Handsontable(container, {
       data: 'bumper',
       editor: 'text'
     }
-  ]
+  ],
+  autoWrapRow: true,
+  autoWrapCol: true
 });
 ```
 
@@ -307,6 +317,8 @@ export const ExampleComponent = () => {
       ]}
       height="auto"
       colHeaders={['Car', 'Year', 'Chassis color', 'Bumper color']}
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
       columns={[
         {
@@ -361,6 +373,8 @@ const hot = new Handsontable(container, {
   ],
   colHeaders: ['Car', 'Year', 'Chassis color', 'Bumper color'],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 
@@ -430,6 +444,8 @@ export const ExampleComponent = () => {
       ]}
       colHeaders={['Car', 'Year', 'Chassis color', 'Bumper color']}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );

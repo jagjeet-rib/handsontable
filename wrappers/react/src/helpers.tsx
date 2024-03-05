@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
+  EditorScopeIdentifier,
   HotEditorCache,
   HotEditorElement
 } from './types';
@@ -83,12 +84,12 @@ export function getOriginalEditorClass(editorElement: HotEditorElement) {
 /**
  * Create an editor portal.
  *
- * @param {Document} [doc] Document to be used.
+ * @param {Document} doc Document to be used.
  * @param {React.ReactElement} editorElement Editor's element.
  * @returns {React.ReactPortal} The portal for the editor.
  */
-export function createEditorPortal(doc: Document = document, editorElement: HotEditorElement): React.ReactPortal | null {
-  if (editorElement === null) {
+export function createEditorPortal(doc: Document, editorElement: HotEditorElement): React.ReactPortal | null {
+  if (typeof doc === 'undefined' || editorElement === null) {
     return null;
   }
 
@@ -104,15 +105,15 @@ export function createEditorPortal(doc: Document = document, editorElement: HotE
 }
 
 /**
- * Get an editor element extended with a instance-emitting method.
+ * Get an editor element extended with an instance-emitting method.
  *
  * @param {React.ReactNode} children Component children.
  * @param {Map} editorCache Component's editor cache.
- * @param {string|number} [editorColumnScope] The editor scope (column index or a 'global' string). Defaults to
+ * @param {EditorScopeIdentifier} [editorColumnScope] The editor scope (column index or a 'global' string). Defaults to
  * 'global'.
  * @returns {React.ReactElement} An editor element containing the additional methods.
  */
-export function getExtendedEditorElement(children: React.ReactNode, editorCache: HotEditorCache, editorColumnScope: string | number = GLOBAL_EDITOR_SCOPE): React.ReactElement | null {
+export function getExtendedEditorElement(children: React.ReactNode, editorCache: HotEditorCache, editorColumnScope: EditorScopeIdentifier = GLOBAL_EDITOR_SCOPE): React.ReactElement | null {
   const editorElement = getChildElementByType(children, 'hot-editor');
   const editorClass = getOriginalEditorClass(editorElement);
 
@@ -180,8 +181,17 @@ export function createPortal(rElement: React.ReactElement, props, ownerDocument:
  */
 export function getContainerAttributesProps(props, randomizeId: boolean = true): {id: string, className: string, style: object} {
   return {
-    id: props.id || (randomizeId ? 'hot-' + Math.random().toString(36).substring(5) : void 0),
+    id: props.id || (randomizeId ? 'hot-' + Math.random().toString(36).substring(5) : undefined),
     className: props.className || '',
     style: props.style || {},
-  }
+  };
+}
+
+/**
+ * Checks if the environment that the code runs in is a browser.
+ *
+ * @returns {boolean}
+ */
+export function isCSR(): boolean {
+  return typeof window !== 'undefined';
 }

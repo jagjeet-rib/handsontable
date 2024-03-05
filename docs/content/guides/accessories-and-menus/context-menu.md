@@ -54,6 +54,8 @@ const hot = new Handsontable(container, {
   colHeaders: true,
   contextMenu: true,
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 ```
@@ -89,6 +91,8 @@ export const ExampleComponent = () => {
       colHeaders={true}
       contextMenu={true}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -169,6 +173,8 @@ const hot = new Handsontable(container, {
   colHeaders: true,
   contextMenu: ['row_above', 'row_below', 'remove_row', 'clear_column'],
   height: 'auto',
+  autoWrapRow: true,
+  autoWrapCol: true,
   licenseKey: 'non-commercial-and-evaluation'
 });
 ```
@@ -204,6 +210,8 @@ export const ExampleComponent = () => {
       colHeaders={true}
       contextMenu={['row_above', 'row_below', 'remove_row', 'clear_column']}
       height="auto"
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
     />
   );
@@ -265,7 +273,9 @@ export const ExampleComponent = () => {
               }
             }
           }
-        }}
+        }} 
+        autoWrapRow={true}
+        autoWrapCol={true}
         licenseKey="non-commercial-and-evaluation"
       />
     </div>
@@ -382,7 +392,9 @@ const hot = new Handsontable(container, {
         isCommand: false // Prevent clicks from executing command and closing the menu
       }
     }
-  }
+  },
+  autoWrapRow: true,
+  autoWrapCol: true
 });
 ```
 
@@ -415,6 +427,8 @@ export const ExampleComponent = () => {
       ]}
       rowHeaders={true}
       colHeaders={true}
+      autoWrapRow={true}
+      autoWrapCol={true}
       licenseKey="non-commercial-and-evaluation"
       height="auto"
       contextMenu={{
@@ -499,13 +513,14 @@ ReactDOM.render(<ExampleComponent />, document.getElementById('example3'));
 
 ## Related keyboard shortcuts
 
-| Windows                  | macOS                    | Action                                                        |  Excel  | Sheets  |
-| ------------------------ | ------------------------ | ------------------------------------------------------------- | :-----: | :-----: |
-| Arrow keys               | Arrow keys               | Move one available menu item up, down, left, or right         | &check; | &check; |
-| <kbd>**Page Up**</kbd>   | <kbd>**Page Up**</kbd>   | Move to the first visible item of the context menu or submenu | &check; | &cross; |
-| <kbd>**Page Down**</kbd> | <kbd>**Page Down**</kbd> | Move to the last visible item of the context menu or submenu  | &check; | &cross; |
-| <kbd>**Escape**</kbd>    | <kbd>**Escape**</kbd>    | Close the context menu or submenu                             | &check; | &check; |
-| <kbd>**Enter**</kbd>     | <kbd>**Enter**</kbd>     | Run the action of the selected menu item                      | &check; | &cross; |
+| Windows                                                                                               | macOS                                                                                                | Action                                                        |  Excel  | Sheets  |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | :-----: | :-----: |
+| <kbd>**Ctrl**</kbd>+<kbd>**Shift**</kbd>+<kbd>**\\**</kbd> or <kbd>**Shift**</kbd>+<kbd>**F10**</kbd> | <kbd>**Cmd**</kbd>+<kbd>**Shift**</kbd>+<kbd>**\\**</kbd> or <kbd>**Shift**</kbd>+<kbd>**F10**</kbd> | Open the context menu                                         | &cross; | &check; |
+| Arrow keys                                                                                            | Arrow keys                                                                                           | Move one available menu item up, down, left, or right         | &check; | &check; |
+| <kbd>**Page Up**</kbd>                                                                                | <kbd>**Page Up**</kbd>                                                                               | Move to the first visible item of the context menu or submenu | &check; | &cross; |
+| <kbd>**Page Down**</kbd>                                                                              | <kbd>**Page Down**</kbd>                                                                             | Move to the last visible item of the context menu or submenu  | &check; | &cross; |
+| <kbd>**Escape**</kbd>                                                                                 | <kbd>**Escape**</kbd>                                                                                | Close the context menu or submenu                             | &check; | &check; |
+| <kbd>**Enter**</kbd>                                                                                  | <kbd>**Enter**</kbd>                                                                                 | Run the action of the selected menu item                      | &check; | &cross; |
 
 ## Related articles
 
@@ -519,7 +534,6 @@ ReactDOM.render(<ExampleComponent />, document.getElementById('example3'));
 - [Custom context menu in Angular](@/guides/integrate-with-angular/angular-custom-context-menu-example.md)
 - [Custom context menu in Vue 2](@/guides/integrate-with-vue/vue-custom-context-menu-example.md)
 - [Custom context menu in Vue 3](@/guides/integrate-with-vue3/vue3-custom-context-menu-example.md)
-
 :::
 
 ### Related blog articles
