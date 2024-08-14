@@ -9,7 +9,8 @@ env:
 on:
   push:
     branches:
-      - latest'
+      - latest
+      - feature/dev-issue-2017
   workflow_dispatch:
 
 defaults:
