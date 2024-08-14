@@ -49,9 +49,9 @@ jobs:
         working-directory: ./latest/
 
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # https://github.com/actions/checkout/releases/tag/v4.1.1
-          with:
-            ref: prod-docs-netlify
-            path: prod-docs-netlify
+        with:
+          ref: prod-docs-netlify
+          path: prod-docs-netlify
 
       - name: List files in the repository
         run: ls ${{ github.workspace }}
