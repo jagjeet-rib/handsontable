@@ -10,7 +10,7 @@ on:
   push:
     branches:
       - latest
-      - feature/dev-issue-2017
+      - feature/dev-issue-1790
   workflow_dispatch:
 
 defaults:
@@ -27,11 +27,6 @@ jobs:
           ref: latest
           path: latest
 
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # https://github.com/actions/checkout/releases/tag/v4.1.1
-        with:
-          ref: prod-docs-netlify
-          path: prod-docs-netlify
-
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # https://github.com/actions/setup-node/releases/tag/v4.0.2
         with:
@@ -41,21 +36,27 @@ jobs:
       - name: Dependencies
         run: |
           npm ci
+        working-directory: ./latest/
 
       - name: Docker build
         run: |
           npm run docs:docker:build:production
+        working-directory: ./latest/
 
       - name: Test examples
         run: |
           npm run docs:test:example-checker
+        working-directory: ./latest/
 
-      - name: Checkout the latest
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # https://github.com/actions/checkout/releases/tag/v4.1.1
-        with:
-          ref: latest
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # https://github.com/actions/checkout/releases/tag/v4.1.1
+          with:
+            ref: prod-docs-netlify
+            path: prod-docs-netlify
 
-      - name: Copy docs to the latest
+      - name: List files in the repository
+        run: ls ${{ github.workspace }}
+
+      - name: Copy docs to the prod netlify
         run: cp -r ../dist/* .
         working-directory: ./docs/tmp
 
