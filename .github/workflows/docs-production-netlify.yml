@@ -49,12 +49,12 @@ jobs:
 
       - name: Checkout the latest
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # https://github.com/actions/checkout/releases/tag/v4.1.1
-          with:
-            ref: latest
+        with:
+          ref: latest
 
       - name: Copy docs to the latest
         run: cp -r ../dist/* .
-          working-directory: ./docs/tmp
+        working-directory: ./docs/tmp
 
       - name: List files in the repository
         run: ls ${{ github.workspace }}
