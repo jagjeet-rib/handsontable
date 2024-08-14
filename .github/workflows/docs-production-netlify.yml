@@ -51,11 +51,14 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # https://github.com/actions/checkout/releases/tag/v4.1.1
           with:
             ref: latest
+
       - name: copy docs to the latest
         run: cp -r ../dist/* .
           working-directory: ./docs/tmp
+
       - name: list files in the repository
-      run: ls ${{ github.workspace }}
+        run: ls ${{ github.workspace }}
+
       - name: deploy to Netlify
         steps:
           - uses: jsmrcaga/action-netlify-deploy@v2.0.0
